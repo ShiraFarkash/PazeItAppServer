@@ -1,0 +1,867 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PITdataBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Branch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="supermarketID" Type="int" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="branchName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\PITDATABASE.MDF.dbo.Branch_To_Product' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Branch_To_Product">
+          <Key>
+            <PropertyRef Name="productID" />
+            <PropertyRef Name="DepartmentID" />
+            <PropertyRef Name="productPrice" />
+          </Key>
+          <Property Name="productID" Type="int" Nullable="false" />
+          <Property Name="DepartmentID" Type="int" Nullable="false" />
+          <Property Name="productPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="categoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Constant_List">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="branchID" Type="int" Nullable="false" />
+          <Property Name="departmentName" Type="nvarchar" MaxLength="50" />
+          <Property Name="departmentNumber" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="One_time_List">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="ProductionDate" Type="datetime" Nullable="false" />
+          <Property Name="endDate" Type="datetime" />
+          <Property Name="status" Type="bit" Nullable="false" />
+          <Property Name="branchID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="productID" Type="int" />
+          <Property Name="categoryID" Type="int" Nullable="false" />
+          <Property Name="barcode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\PITDATABASE.MDF.dbo.Product_To_List' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Product_To_List">
+          <Key>
+            <PropertyRef Name="constantListID" />
+            <PropertyRef Name="productID" />
+          </Key>
+          <Property Name="constantListID" Type="int" Nullable="false" />
+          <Property Name="productID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\PITDATABASE.MDF.dbo.Product_To_OneTimeList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Product_To_OneTimeList">
+          <Key>
+            <PropertyRef Name="OneTimeListID" />
+            <PropertyRef Name="productID" />
+            <PropertyRef Name="isTaken" />
+          </Key>
+          <Property Name="OneTimeListID" Type="int" Nullable="false" />
+          <Property Name="productID" Type="int" Nullable="false" />
+          <Property Name="isTaken" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="supermarket">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\PITDATABASE.MDF.dbo.User_to_Lists' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="User_to_Lists">
+          <Key>
+            <PropertyRef Name="userID" />
+            <PropertyRef Name="OneTimeListID" />
+          </Key>
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="OneTimeListID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="userLastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Branch_supermarket">
+          <End Role="supermarket" Type="Self.supermarket" Multiplicity="1" />
+          <End Role="Branch" Type="Self.Branch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="supermarket">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Branch">
+              <PropertyRef Name="supermarketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Branch_To_Product_department">
+          <End Role="department" Type="Self.department" Multiplicity="1" />
+          <End Role="Branch_To_Product" Type="Self.Branch_To_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Branch_To_Product">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Branch_To_Product_product">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="Branch_To_Product" Type="Self.Branch_To_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Branch_To_Product">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Constant_List_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="Constant_List" Type="Self.Constant_List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Constant_List">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_department_Branch">
+          <End Role="Branch" Type="Self.Branch" Multiplicity="1" />
+          <End Role="department" Type="Self.department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="department">
+              <PropertyRef Name="branchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_One_time_List_Branch">
+          <End Role="Branch" Type="Self.Branch" Multiplicity="1" />
+          <End Role="One_time_List" Type="Self.One_time_List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="One_time_List">
+              <PropertyRef Name="branchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_One_time_List_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="One_time_List" Type="Self.One_time_List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="One_time_List">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_product_category">
+          <End Role="category" Type="Self.category" Multiplicity="1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="categoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_product_product">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="product1" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="product1">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_To_List_Constant_List">
+          <End Role="Constant_List" Type="Self.Constant_List" Multiplicity="1" />
+          <End Role="Product_To_List" Type="Self.Product_To_List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Constant_List">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product_To_List">
+              <PropertyRef Name="constantListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_To_List_product">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="Product_To_List" Type="Self.Product_To_List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product_To_List">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_To_OneTimeList_One_time_List">
+          <End Role="One_time_List" Type="Self.One_time_List" Multiplicity="1" />
+          <End Role="Product_To_OneTimeList" Type="Self.Product_To_OneTimeList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="One_time_List">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product_To_OneTimeList">
+              <PropertyRef Name="OneTimeListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_To_OneTimeList_product">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="Product_To_OneTimeList" Type="Self.Product_To_OneTimeList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product_To_OneTimeList">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_to_Lists_one_time_List">
+          <End Role="One_time_List" Type="Self.One_time_List" Multiplicity="1" />
+          <End Role="User_to_Lists" Type="Self.User_to_Lists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="One_time_List">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_to_Lists">
+              <PropertyRef Name="OneTimeListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_to_Lists_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="User_to_Lists" Type="Self.User_to_Lists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_to_Lists">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PITdataBaseModelStoreContainer">
+          <EntitySet Name="Branch" EntityType="Self.Branch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Constant_List" EntityType="Self.Constant_List" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="department" EntityType="Self.department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="One_time_List" EntityType="Self.One_time_List" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="supermarket" EntityType="Self.supermarket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Branch_To_Product" EntityType="Self.Branch_To_Product" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Branch_To_Product].[productID] AS [productID], 
+    [Branch_To_Product].[DepartmentID] AS [DepartmentID], 
+    [Branch_To_Product].[productPrice] AS [productPrice]
+    FROM [dbo].[Branch_To_Product] AS [Branch_To_Product]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Product_To_List" EntityType="Self.Product_To_List" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Product_To_List].[constantListID] AS [constantListID], 
+    [Product_To_List].[productID] AS [productID]
+    FROM [dbo].[Product_To_List] AS [Product_To_List]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Product_To_OneTimeList" EntityType="Self.Product_To_OneTimeList" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Product_To_OneTimeList].[OneTimeListID] AS [OneTimeListID], 
+    [Product_To_OneTimeList].[productID] AS [productID], 
+    [Product_To_OneTimeList].[isTaken] AS [isTaken]
+    FROM [dbo].[Product_To_OneTimeList] AS [Product_To_OneTimeList]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="User_to_Lists" EntityType="Self.User_to_Lists" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [User_to_Lists].[userID] AS [userID], 
+    [User_to_Lists].[OneTimeListID] AS [OneTimeListID]
+    FROM [dbo].[User_to_Lists] AS [User_to_Lists]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Branch_supermarket" Association="Self.FK_Branch_supermarket">
+            <End Role="supermarket" EntitySet="supermarket" />
+            <End Role="Branch" EntitySet="Branch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Branch_To_Product_department" Association="Self.FK_Branch_To_Product_department">
+            <End Role="department" EntitySet="department" />
+            <End Role="Branch_To_Product" EntitySet="Branch_To_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Branch_To_Product_product" Association="Self.FK_Branch_To_Product_product">
+            <End Role="product" EntitySet="product" />
+            <End Role="Branch_To_Product" EntitySet="Branch_To_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Constant_List_users" Association="Self.FK_Constant_List_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="Constant_List" EntitySet="Constant_List" />
+          </AssociationSet>
+          <AssociationSet Name="FK_department_Branch" Association="Self.FK_department_Branch">
+            <End Role="Branch" EntitySet="Branch" />
+            <End Role="department" EntitySet="department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_One_time_List_Branch" Association="Self.FK_One_time_List_Branch">
+            <End Role="Branch" EntitySet="Branch" />
+            <End Role="One_time_List" EntitySet="One_time_List" />
+          </AssociationSet>
+          <AssociationSet Name="FK_One_time_List_users" Association="Self.FK_One_time_List_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="One_time_List" EntitySet="One_time_List" />
+          </AssociationSet>
+          <AssociationSet Name="FK_product_category" Association="Self.FK_product_category">
+            <End Role="category" EntitySet="category" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_product_product" Association="Self.FK_product_product">
+            <End Role="product" EntitySet="product" />
+            <End Role="product1" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_To_List_Constant_List" Association="Self.FK_Product_To_List_Constant_List">
+            <End Role="Constant_List" EntitySet="Constant_List" />
+            <End Role="Product_To_List" EntitySet="Product_To_List" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_To_List_product" Association="Self.FK_Product_To_List_product">
+            <End Role="product" EntitySet="product" />
+            <End Role="Product_To_List" EntitySet="Product_To_List" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_To_OneTimeList_One_time_List" Association="Self.FK_Product_To_OneTimeList_One_time_List">
+            <End Role="One_time_List" EntitySet="One_time_List" />
+            <End Role="Product_To_OneTimeList" EntitySet="Product_To_OneTimeList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_To_OneTimeList_product" Association="Self.FK_Product_To_OneTimeList_product">
+            <End Role="product" EntitySet="product" />
+            <End Role="Product_To_OneTimeList" EntitySet="Product_To_OneTimeList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_to_Lists_one_time_List" Association="Self.FK_User_to_Lists_one_time_List">
+            <End Role="One_time_List" EntitySet="One_time_List" />
+            <End Role="User_to_Lists" EntitySet="User_to_Lists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_to_Lists_users" Association="Self.FK_User_to_Lists_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="User_to_Lists" EntitySet="User_to_Lists" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PITdataBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Branch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="supermarketID" Type="Int32" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="branchName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="supermarket" Relationship="Self.FK_Branch_supermarket" FromRole="Branch" ToRole="supermarket" />
+          <NavigationProperty Name="departments" Relationship="Self.FK_department_Branch" FromRole="Branch" ToRole="department" />
+          <NavigationProperty Name="One_time_List" Relationship="Self.FK_One_time_List_Branch" FromRole="Branch" ToRole="One_time_List" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="categoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="products" Relationship="Self.FK_product_category" FromRole="category" ToRole="product" />
+        </EntityType>
+        <EntityType Name="Constant_List">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="user" Relationship="Self.FK_Constant_List_users" FromRole="Constant_List" ToRole="users" />
+          <NavigationProperty Name="products" Relationship="Self.Product_To_List" FromRole="Constant_List" ToRole="product" />
+        </EntityType>
+        <EntityType Name="department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="branchID" Type="Int32" Nullable="false" />
+          <Property Name="departmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="departmentNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Branch" Relationship="Self.FK_department_Branch" FromRole="department" ToRole="Branch" />
+          <NavigationProperty Name="Branch_To_Product" Relationship="Self.FK_Branch_To_Product_department" FromRole="department" ToRole="Branch_To_Product" />
+        </EntityType>
+        <EntityType Name="One_time_List">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="ProductionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="endDate" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+          <Property Name="branchID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Branch" Relationship="Self.FK_One_time_List_Branch" FromRole="One_time_List" ToRole="Branch" />
+          <NavigationProperty Name="user" Relationship="Self.FK_One_time_List_users" FromRole="One_time_List" ToRole="users" />
+          <NavigationProperty Name="Product_To_OneTimeList" Relationship="Self.FK_Product_To_OneTimeList_One_time_List" FromRole="One_time_List" ToRole="Product_To_OneTimeList" />
+          <NavigationProperty Name="users" Relationship="Self.User_to_Lists" FromRole="One_time_List" ToRole="users" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="productID" Type="Int32" />
+          <Property Name="categoryID" Type="Int32" Nullable="false" />
+          <Property Name="barcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="category" Relationship="Self.FK_product_category" FromRole="product" ToRole="category" />
+          <NavigationProperty Name="Branch_To_Product" Relationship="Self.FK_Branch_To_Product_product" FromRole="product" ToRole="Branch_To_Product" />
+          <NavigationProperty Name="product1" Relationship="Self.FK_product_product" FromRole="product" ToRole="product1" />
+          <NavigationProperty Name="product2" Relationship="Self.FK_product_product" FromRole="product1" ToRole="product" />
+          <NavigationProperty Name="Product_To_OneTimeList" Relationship="Self.FK_Product_To_OneTimeList_product" FromRole="product" ToRole="Product_To_OneTimeList" />
+          <NavigationProperty Name="Constant_List" Relationship="Self.Product_To_List" FromRole="product" ToRole="Constant_List" />
+        </EntityType>
+        <EntityType Name="supermarket">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Branches" Relationship="Self.FK_Branch_supermarket" FromRole="supermarket" ToRole="Branch" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Constant_List" Relationship="Self.FK_Constant_List_users" FromRole="users" ToRole="Constant_List" />
+          <NavigationProperty Name="One_time_List" Relationship="Self.FK_One_time_List_users" FromRole="users" ToRole="One_time_List" />
+          <NavigationProperty Name="One_time_List1" Relationship="Self.User_to_Lists" FromRole="users" ToRole="One_time_List" />
+        </EntityType>
+        <EntityType Name="Branch_To_Product">
+          <Key>
+            <PropertyRef Name="productID" />
+            <PropertyRef Name="DepartmentID" />
+            <PropertyRef Name="productPrice" />
+          </Key>
+          <Property Name="productID" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentID" Type="Int32" Nullable="false" />
+          <Property Name="productPrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="department" Relationship="Self.FK_Branch_To_Product_department" FromRole="Branch_To_Product" ToRole="department" />
+          <NavigationProperty Name="product" Relationship="Self.FK_Branch_To_Product_product" FromRole="Branch_To_Product" ToRole="product" />
+        </EntityType>
+        <EntityType Name="Product_To_OneTimeList">
+          <Key>
+            <PropertyRef Name="OneTimeListID" />
+            <PropertyRef Name="productID" />
+            <PropertyRef Name="isTaken" />
+          </Key>
+          <Property Name="OneTimeListID" Type="Int32" Nullable="false" />
+          <Property Name="productID" Type="Int32" Nullable="false" />
+          <Property Name="isTaken" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="One_time_List" Relationship="Self.FK_Product_To_OneTimeList_One_time_List" FromRole="Product_To_OneTimeList" ToRole="One_time_List" />
+          <NavigationProperty Name="product" Relationship="Self.FK_Product_To_OneTimeList_product" FromRole="Product_To_OneTimeList" ToRole="product" />
+        </EntityType>
+        <Association Name="FK_Branch_supermarket">
+          <End Role="supermarket" Type="Self.supermarket" Multiplicity="1" />
+          <End Role="Branch" Type="Self.Branch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="supermarket">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Branch">
+              <PropertyRef Name="supermarketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_department_Branch">
+          <End Role="Branch" Type="Self.Branch" Multiplicity="1" />
+          <End Role="department" Type="Self.department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="department">
+              <PropertyRef Name="branchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_One_time_List_Branch">
+          <End Role="Branch" Type="Self.Branch" Multiplicity="1" />
+          <End Role="One_time_List" Type="Self.One_time_List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="One_time_List">
+              <PropertyRef Name="branchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_product_category">
+          <End Role="category" Type="Self.category" Multiplicity="1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="categoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Constant_List_users">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="Constant_List" Type="Self.Constant_List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Constant_List">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Branch_To_Product_department">
+          <End Role="department" Type="Self.department" Multiplicity="1" />
+          <End Role="Branch_To_Product" Type="Self.Branch_To_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Branch_To_Product">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_One_time_List_users">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="One_time_List" Type="Self.One_time_List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="One_time_List">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_To_OneTimeList_One_time_List">
+          <End Role="One_time_List" Type="Self.One_time_List" Multiplicity="1" />
+          <End Role="Product_To_OneTimeList" Type="Self.Product_To_OneTimeList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="One_time_List">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product_To_OneTimeList">
+              <PropertyRef Name="OneTimeListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Branch_To_Product_product">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="Branch_To_Product" Type="Self.Branch_To_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Branch_To_Product">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_product_product">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="product1" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="product1">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_To_OneTimeList_product">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="Product_To_OneTimeList" Type="Self.Product_To_OneTimeList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product_To_OneTimeList">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Product_To_List">
+          <End Role="Constant_List" Type="Self.Constant_List" Multiplicity="*" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+        </Association>
+        <Association Name="User_to_Lists">
+          <End Role="One_time_List" Type="Self.One_time_List" Multiplicity="*" />
+          <End Role="users" Type="Self.user" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="PITdataBaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Branches" EntityType="Self.Branch" />
+          <EntitySet Name="categories" EntityType="Self.category" />
+          <EntitySet Name="Constant_List" EntityType="Self.Constant_List" />
+          <EntitySet Name="departments" EntityType="Self.department" />
+          <EntitySet Name="One_time_List" EntityType="Self.One_time_List" />
+          <EntitySet Name="products" EntityType="Self.product" />
+          <EntitySet Name="supermarkets" EntityType="Self.supermarket" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <EntitySet Name="Branch_To_Product" EntityType="Self.Branch_To_Product" />
+          <EntitySet Name="Product_To_OneTimeList" EntityType="Self.Product_To_OneTimeList" />
+          <AssociationSet Name="FK_Branch_supermarket" Association="Self.FK_Branch_supermarket">
+            <End Role="supermarket" EntitySet="supermarkets" />
+            <End Role="Branch" EntitySet="Branches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_department_Branch" Association="Self.FK_department_Branch">
+            <End Role="Branch" EntitySet="Branches" />
+            <End Role="department" EntitySet="departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_One_time_List_Branch" Association="Self.FK_One_time_List_Branch">
+            <End Role="Branch" EntitySet="Branches" />
+            <End Role="One_time_List" EntitySet="One_time_List" />
+          </AssociationSet>
+          <AssociationSet Name="FK_product_category" Association="Self.FK_product_category">
+            <End Role="category" EntitySet="categories" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Constant_List_users" Association="Self.FK_Constant_List_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="Constant_List" EntitySet="Constant_List" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Branch_To_Product_department" Association="Self.FK_Branch_To_Product_department">
+            <End Role="department" EntitySet="departments" />
+            <End Role="Branch_To_Product" EntitySet="Branch_To_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_One_time_List_users" Association="Self.FK_One_time_List_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="One_time_List" EntitySet="One_time_List" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_To_OneTimeList_One_time_List" Association="Self.FK_Product_To_OneTimeList_One_time_List">
+            <End Role="One_time_List" EntitySet="One_time_List" />
+            <End Role="Product_To_OneTimeList" EntitySet="Product_To_OneTimeList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Branch_To_Product_product" Association="Self.FK_Branch_To_Product_product">
+            <End Role="product" EntitySet="products" />
+            <End Role="Branch_To_Product" EntitySet="Branch_To_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_product_product" Association="Self.FK_product_product">
+            <End Role="product" EntitySet="products" />
+            <End Role="product1" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_To_OneTimeList_product" Association="Self.FK_Product_To_OneTimeList_product">
+            <End Role="product" EntitySet="products" />
+            <End Role="Product_To_OneTimeList" EntitySet="Product_To_OneTimeList" />
+          </AssociationSet>
+          <AssociationSet Name="Product_To_List" Association="Self.Product_To_List">
+            <End Role="Constant_List" EntitySet="Constant_List" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="User_to_Lists" Association="Self.User_to_Lists">
+            <End Role="One_time_List" EntitySet="One_time_List" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PITdataBaseModelStoreContainer" CdmEntityContainer="PITdataBaseEntities">
+          <EntitySetMapping Name="Branches">
+            <EntityTypeMapping TypeName="PITdataBaseModel.Branch">
+              <MappingFragment StoreEntitySet="Branch">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="supermarketID" ColumnName="supermarketID" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="branchName" ColumnName="branchName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="categories">
+            <EntityTypeMapping TypeName="PITdataBaseModel.category">
+              <MappingFragment StoreEntitySet="category">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="categoryName" ColumnName="categoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Constant_List">
+            <EntityTypeMapping TypeName="PITdataBaseModel.Constant_List">
+              <MappingFragment StoreEntitySet="Constant_List">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="departments">
+            <EntityTypeMapping TypeName="PITdataBaseModel.department">
+              <MappingFragment StoreEntitySet="department">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="branchID" ColumnName="branchID" />
+                <ScalarProperty Name="departmentName" ColumnName="departmentName" />
+                <ScalarProperty Name="departmentNumber" ColumnName="departmentNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="One_time_List">
+            <EntityTypeMapping TypeName="PITdataBaseModel.One_time_List">
+              <MappingFragment StoreEntitySet="One_time_List">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="ProductionDate" ColumnName="ProductionDate" />
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="branchID" ColumnName="branchID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="PITdataBaseModel.product">
+              <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="productName" ColumnName="productName" />
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="categoryID" ColumnName="categoryID" />
+                <ScalarProperty Name="barcode" ColumnName="barcode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="supermarkets">
+            <EntityTypeMapping TypeName="PITdataBaseModel.supermarket">
+              <MappingFragment StoreEntitySet="supermarket">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="PITdataBaseModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="userLastName" ColumnName="userLastName" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Branch_To_Product">
+            <EntityTypeMapping TypeName="PITdataBaseModel.Branch_To_Product">
+              <MappingFragment StoreEntitySet="Branch_To_Product">
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="productPrice" ColumnName="productPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_To_OneTimeList">
+            <EntityTypeMapping TypeName="PITdataBaseModel.Product_To_OneTimeList">
+              <MappingFragment StoreEntitySet="Product_To_OneTimeList">
+                <ScalarProperty Name="OneTimeListID" ColumnName="OneTimeListID" />
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="isTaken" ColumnName="isTaken" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Product_To_List" TypeName="PITdataBaseModel.Product_To_List" StoreEntitySet="Product_To_List">
+            <EndProperty Name="Constant_List">
+              <ScalarProperty Name="Id" ColumnName="constantListID" />
+            </EndProperty>
+            <EndProperty Name="product">
+              <ScalarProperty Name="Id" ColumnName="productID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="User_to_Lists" TypeName="PITdataBaseModel.User_to_Lists" StoreEntitySet="User_to_Lists">
+            <EndProperty Name="One_time_List">
+              <ScalarProperty Name="Id" ColumnName="OneTimeListID" />
+            </EndProperty>
+            <EndProperty Name="users">
+              <ScalarProperty Name="Id" ColumnName="userID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

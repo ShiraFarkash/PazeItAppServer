@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="PITdataBaseDataSet" targetNamespace="http://tempuri.org/PITdataBaseDataSet.xsd" xmlns:mstns="http://tempuri.org/PITdataBaseDataSet.xsd" xmlns="http://tempuri.org/PITdataBaseDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="PITdataBaseConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="PITdataBaseConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.PazeItDataB.Properties.Settings.GlobalReference.Default.PITdataBaseConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="PITdataBaseDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="PITdataBaseDataSet" msprop:Generator_UserDSName="PITdataBaseDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

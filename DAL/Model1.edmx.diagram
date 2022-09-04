@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b3e58946be59415ab7ee5ec426afa513" Name="Diagram1" ZoomLevel="125">
+        <EntityTypeShape EntityType="PITdataBaseModel.Branch" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PITdataBaseModel.category" Width="1.5" PointX="9.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="PITdataBaseModel.Constant_List" Width="1.5" PointX="9.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PITdataBaseModel.department" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PITdataBaseModel.One_time_List" Width="1.5" PointX="7.875" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PITdataBaseModel.product" Width="1.5" PointX="12" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PITdataBaseModel.supermarket" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PITdataBaseModel.user" Width="1.5" PointX="7.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PITdataBaseModel.Branch_To_Product" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PITdataBaseModel.Product_To_OneTimeList" Width="1.5" PointX="14.875" PointY="4.25" IsExpanded="true" />
+        <AssociationConnector Association="PITdataBaseModel.FK_Branch_supermarket" ManuallyRouted="false" />
+        <AssociationConnector Association="PITdataBaseModel.FK_department_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="PITdataBaseModel.FK_One_time_List_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="PITdataBaseModel.FK_product_category" ManuallyRouted="false" />
+        <AssociationConnector Association="PITdataBaseModel.FK_Constant_List_users" ManuallyRouted="false" />
+        <AssociationConnector Association="PITdataBaseModel.FK_Branch_To_Product_department" ManuallyRouted="false" />
+        <AssociationConnector Association="PITdataBaseModel.FK_One_time_List_users" ManuallyRouted="false" />
+        <AssociationConnector Association="PITdataBaseModel.FK_Product_To_OneTimeList_One_time_List" ManuallyRouted="false" />
+        <AssociationConnector Association="PITdataBaseModel.FK_Branch_To_Product_product" ManuallyRouted="false" />
+        <AssociationConnector Association="PITdataBaseModel.FK_product_product" ManuallyRouted="false" />
+        <AssociationConnector Association="PITdataBaseModel.FK_Product_To_OneTimeList_product" ManuallyRouted="false" />
+        <AssociationConnector Association="PITdataBaseModel.Product_To_List" ManuallyRouted="false" />
+        <AssociationConnector Association="PITdataBaseModel.User_to_Lists" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
