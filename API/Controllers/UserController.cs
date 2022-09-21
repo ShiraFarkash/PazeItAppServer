@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using BL;
+using DAL;
 using DTO;
 using System;
 using System.Collections.Generic;
@@ -30,27 +31,30 @@ namespace API.Controllers
             return numOfP;
         }
 
-       [ Route("AddUser"), HttpPost]
+        [Route("AddUser"), HttpPost]
         public IHttpActionResult AddUser(userDTO user)
         {
-            BL.userBL.AddUser(user);
+           userBL.AddUser(user);
             return Ok(true);
         }
-
+        userBL userBL = new userBL();
         [Route("getAllUsers"), HttpGet]
-        public List<DTO.userDTO> getAllUsers()
+        public IEnumerable<DTO.userDTO> getAllUsers()
         {
-           return BL.userBL.GetAllUsers();
+           return userBL.GetAllUsers();
         }
 
+    
 
-        [Route("AddBranch/{superName}/{addres}/{Bname}"), HttpPost]
-        public IHttpActionResult AddBranch(string superName, string addres, string Bname)
-        {
-            BL.branchBL.AddBranch(superName, addres, Bname);
-            return Ok(1);
+       
 
-        }
+        //[Route("AddBranch/{superName}/{addres}/{Bname}"), HttpPost]
+        //public IHttpActionResult AddBranch(string superName, string addres, string Bname)
+        //{
+        //    BL.branchBL.AddBranch(superName, addres, Bname);
+        //    return Ok(1);
+
+        //}
 
 
     }

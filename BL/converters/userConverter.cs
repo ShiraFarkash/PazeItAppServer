@@ -35,6 +35,15 @@ namespace BL.converters
 
         }
 
+        public static IEnumerable<userDTO> Map(IEnumerable<user> users)
+        {
+            foreach (var item in users)
+            {
+                yield return Map(item);
+            }
+
+        }
+
 
     }
 }

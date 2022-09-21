@@ -102,6 +102,7 @@
     <Compile Include="product.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="productDAL.cs" />
     <Compile Include="Product_To_OneTimeList.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

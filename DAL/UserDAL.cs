@@ -16,5 +16,13 @@ namespace DAL
                 DB.SaveChanges();
             }
         }
+
+        public List<user> GetAllUsers()
+        {
+            using (PITdataBaseEntities DB = new PITdataBaseEntities())
+            {
+                return DB.users.ToList();
+            }
+            }
     }
 }
