@@ -19,6 +19,12 @@ namespace API.Controllers
         {
             return productBL.GatMainProduct();
         }
+
+        [Route("GatProductsByMainProduct"), HttpGet]
+        public IEnumerable<DTO.productDTO> GatProductsByMainProduct(DTO.productDTO p)
+        {
+            return productBL.GatProductsByMainProduct(p);
+        }
     }
     //public class ProductController : Controller
     //{

@@ -15,5 +15,13 @@ namespace DAL
                 return DB.products.Where(p => p.productID == null).ToList();
             }
         }
+
+        public List<product> GatProductsByMainProduct(product product)
+        {
+            using (PITdataBaseEntities DB = new PITdataBaseEntities())
+            {
+                return DB.products.Where(p => p.productID == product.Id).ToList();
+            }
+        }
     }
 }

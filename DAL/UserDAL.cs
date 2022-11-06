@@ -23,6 +23,6 @@ namespace DAL
             {
                 return DB.users.ToList();
             }
-            }
+        }
     }
 }

@@ -46,7 +46,8 @@ namespace BL
             //@"   ""htmlContent"":""<html><head></head><body><p>Hello,</p>yours Verification code is 11111</p></body></html>""
             //" + "\n" +
             //@"}";
-            request.AddParameter("application/json", apiBody, ParameterType.RequestBody);
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody( apiBody);
             RestResponse response = client.Execute(request);
             return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
@@ -57,7 +58,7 @@ namespace BL
    
        
             public Sender sender { get; set; }
-            public To to { get; set; }
+            public List<To> to { get; set; }
             public string subject { get; set; }
             public string htmlContent { get; set; }
         }

@@ -15,5 +15,12 @@ namespace BL
         {
             return converters.productConverter.Map(productDAL.GatMainProduct());
         }
+
+        public IEnumerable<DTO.productDTO> GatProductsByMainProduct(DTO.productDTO product)
+        {
+            return converters.productConverter.Map(
+                productDAL.GatProductsByMainProduct(converters.productConverter.Map(product)));
+        }
+
     }
 }
