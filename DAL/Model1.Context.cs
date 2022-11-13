@@ -12,7 +12,7 @@ namespace DAL
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+    using System.Data.Entity.SqlServer;
     public partial class PITdataBaseEntities : DbContext
     {
         public PITdataBaseEntities()
@@ -36,4 +36,24 @@ namespace DAL
         public virtual DbSet<Branch_To_Product> Branch_To_Product { get; set; }
         public virtual DbSet<Product_To_OneTimeList> Product_To_OneTimeList { get; set; }
     }
+
+    public class DbConfiguration {
+        public DbConfiguration()
+        {
+            SetExecutionStrategy("System.Data.SqlClient", () => new SqlAzureExecutionStrategy());
+            SetDefaultConnectionFactory(new LocalDbConnectionFactory("mssqllocaldb"));
+        }
+
+        private void SetDefaultConnectionFactory(LocalDbConnectionFactory localDbConnectionFactory)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SetExecutionStrategy(string v, Func<SqlAzureExecutionStrategy> p)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
 }
