@@ -16,11 +16,12 @@ namespace DAL
             }
         }
 
-        public List<product> GatProductsByMainProduct(product product)
+        public List<product> GatProductsByMainProduct(DAL.product p)
         {
             using (PITdataBaseEntities DB = new PITdataBaseEntities())
             {
-                return DB.products.Where(p => p.productID == product.Id).ToList();
+              
+                return DB.products.Where(b => (b.productID == p.Id)).ToList();
             }
         }
     }

@@ -14,6 +14,7 @@ namespace BL.converters
         {
             return new product
             {
+                Id = product.Id,
                 productName = product.productName,
                 productID = product.productID,
                 categoryID = product.categoryID,
@@ -26,6 +27,7 @@ namespace BL.converters
         {
             return new productDTO
             {
+                Id=product.Id,
                 productName = product.productName,
                 productID = product.productID,
                 categoryID = product.categoryID,

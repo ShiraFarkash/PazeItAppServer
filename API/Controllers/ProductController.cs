@@ -14,24 +14,30 @@ namespace API.Controllers
     public class ProductController : ApiController
     {
         productBL productBL = new productBL();
+
         [Route("gatMainProduct"), HttpGet]
         public IEnumerable<DTO.productDTO> gatMainProduct()
         {
             return productBL.GatMainProduct();
         }
 
-        [Route("GatProductsByMainProduct"), HttpGet]
+
+        //[Route("GatProductsByMainProduct")]
+        //[HttpPost]
+        //public IEnumerable<DTO.productDTO> GatProductsByMainProduct(int id)
+        //{
+        //    //return id;
+        //
+        //    return productBL.GatProductsByMainProduct(id);
+        //}
+
+        [Route("GatProductsByMainProduct")]
+        [HttpPost]
         public IEnumerable<DTO.productDTO> GatProductsByMainProduct(DTO.productDTO p)
         {
+           // return p.Id;
+
             return productBL.GatProductsByMainProduct(p);
         }
     }
-    //public class ProductController : Controller
-    //{
-    //    // GET: Product
-    //    public ActionResult Index()
-    //    {
-    //        return View();
-    //    }
-    //}
 }
