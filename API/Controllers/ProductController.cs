@@ -39,5 +39,13 @@ namespace API.Controllers
 
             return productBL.GatProductsByMainProduct(p);
         }
+        [Route("addContantList")]
+        [HttpPost]
+        public IHttpActionResult addContantList(DTO.Constant_ListDTO constantList)
+        {
+           productBL.addContantList(constantList);
+            return Ok(true);
+        }
+
     }
 }

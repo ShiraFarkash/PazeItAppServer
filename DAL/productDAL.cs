@@ -24,5 +24,14 @@ namespace DAL
                 return DB.products.Where(b => (b.productID == p.Id)).ToList();
             }
         }
+
+        public void addContantList(Constant_List c)
+        {
+            using (PITdataBaseEntities DB = new PITdataBaseEntities())
+            {
+                DB.Constant_List.Add(c);
+                DB.SaveChanges();
+            }
+        }
     }
 }

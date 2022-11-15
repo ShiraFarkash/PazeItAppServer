@@ -1,4 +1,5 @@
 ﻿using DAL;
+using DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +18,16 @@ namespace BL
         }
 
         public IEnumerable<DTO.productDTO> GatProductsByMainProduct(DTO.productDTO p)
+
         {
             return converters.productConverter.Map(
                 productDAL.GatProductsByMainProduct(converters.productConverter.Map(p)) );
         }
 
+        public void addContantList(Constant_ListDTO constantList)
+        {
+            
+             productDAL.addContantList(converters.ConstantListConverter.Map(constantList));
+        }
     }
 }

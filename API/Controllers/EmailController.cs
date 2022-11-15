@@ -28,7 +28,7 @@ namespace API.Controllers
             apibody.to = new List<To>();
             apibody.to.Add(new To { email =Email , name = "jana" });
             apibody.subject = "Verification code";
-            apibody.htmlContent = "<html><head></head><body><p>Hello,</p>yours Verification "+code+" is 11111</p></body></html>";
+            apibody.htmlContent = "<html><head></head><body><p>Hello,</p>yours Verification is" + code+"</p></body></html>";
 
             return EmailService.SendEmail(apibody);
            
