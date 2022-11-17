@@ -19,9 +19,9 @@ namespace BL
     {
         UserDAL userDAL = new UserDAL();
          
-        public  void AddUser(userDTO user)
+        public  int AddUser(userDTO user)
         {
-            userDAL.AddUser(converters.userConverter.Map(user));
+           return  userDAL.AddUser(converters.userConverter.Map(user));
         }
 
        

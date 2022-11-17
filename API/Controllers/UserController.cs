@@ -32,11 +32,17 @@ namespace API.Controllers
         }
 
         [Route("AddUser"), HttpPost]
-        public IHttpActionResult AddUser(userDTO user)
+        public int AddUser(userDTO user)
         {
-           userBL.AddUser(user);
-            return Ok(true);
+           return userBL.AddUser(user);
+          
         }
+        //[Route("AddUser"), HttpPost]
+        //public IHttpActionResult AddUser(userDTO user)
+        //{
+        //    userBL.AddUser(user);
+        //    return Ok(true);
+        //}
         userBL userBL = new userBL();
         [Route("getAllUsers"), HttpGet]
         public IEnumerable<DTO.userDTO> getAllUsers()
