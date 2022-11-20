@@ -41,11 +41,14 @@ namespace API.Controllers
         }
         [Route("addContantList")]
         [HttpPost]
-        public IHttpActionResult addContantList(DTO.Constant_ListDTO constantList)
+        public int addContantList(DTO.Constant_ListDTO constantList)
         {
-           productBL.addContantList(constantList);
-            return Ok(true);
+            return productBL.addContantList(constantList); 
         }
+        
+        //public IHttpActionResult addProductToBasicList()
+
+
 
     }
 }

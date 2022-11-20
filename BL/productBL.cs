@@ -24,10 +24,10 @@ namespace BL
                 productDAL.GatProductsByMainProduct(converters.productConverter.Map(p)) );
         }
 
-        public void addContantList(Constant_ListDTO constantList)
+        public int addContantList(Constant_ListDTO constantList)
         {
             
-             productDAL.addContantList(converters.ConstantListConverter.Map(constantList));
+             return productDAL.addContantList(converters.ConstantListConverter.Map(constantList));
         }
     }
 }

@@ -25,13 +25,18 @@ namespace DAL
             }
         }
 
-        public void addContantList(Constant_List c)
+        public int addContantList(Constant_List c)
         {
             using (PITdataBaseEntities DB = new PITdataBaseEntities())
             {
                 DB.Constant_List.Add(c);
                 DB.SaveChanges();
+                return c.Id;
+               
+              
             }
+
+
         }
     }
 }

@@ -17,8 +17,8 @@ namespace BL.converters
                 userName = user.userName,
                 userLastName = user.userLastName,
                 email = user.email,
-                password = user.password
-
+                password = user.password,
+                Id = user.Id
             };
 
         }
@@ -29,7 +29,9 @@ namespace BL.converters
                 userName = user.userName,
                 userLastName = user.userLastName,
                 email = user.email,
-                password = user.password
+                password = user.password,
+                Id=user.Id
+                
 
             };
 
