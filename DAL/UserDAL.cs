@@ -26,5 +26,24 @@ namespace DAL
                 return DB.users.ToList();
             }
         }
+
+        public int isUserExist(string email, string pass)
+        {
+            using (PITdataBaseEntities DB = new PITdataBaseEntities())
+            {
+                try
+                {
+                    user user = DB.users.Where(u => u.email == email && u.password == pass).FirstOrDefault();
+                    if (user != null)
+                        return user.Id;
+                }
+                catch (Exception)
+                {
+                    return -1;
+                }
+                return -1;
+
+            }
+        }
     }
 }

@@ -50,9 +50,15 @@ namespace API.Controllers
            return userBL.GetAllUsers();
         }
 
-    
+        [Route("isUserExist"), HttpGet]
+        public int isUserExist(string email, string pass)
+        {
+            return userBL.isUserExist( email,  pass);
+        }
 
-       
+
+
+
 
         //[Route("AddBranch/{superName}/{addres}/{Bname}"), HttpPost]
         //public IHttpActionResult AddBranch(string superName, string addres, string Bname)
