@@ -12,13 +12,13 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Product_To_OneTimeList
+    public partial class Product_To_List
     {
-        public int OneTimeListID { get; set; }
+        public int constantListID { get; set; }
         public int productID { get; set; }
-        public bool isTaken { get; set; }
+        public int quantity { get; set; }
     
-        public virtual One_time_List One_time_List { get; set; }
+        public virtual Constant_List Constant_List { get; set; }
         public virtual product product { get; set; }
     }
 }

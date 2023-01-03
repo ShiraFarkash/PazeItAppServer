@@ -45,7 +45,12 @@ namespace API.Controllers
         {
             return productBL.addContantList(constantList); 
         }
-        
+
+        //public int addListOf_ProductToContantList()
+        //{
+        //    return productBL.addContantList();
+        //}
+
         //public IHttpActionResult addProductToBasicList()
 
 
