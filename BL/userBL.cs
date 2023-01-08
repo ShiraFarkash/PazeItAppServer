@@ -30,9 +30,9 @@ namespace BL
             return converters.userConverter.Map(userDAL.GetAllUsers());
         }
 
-        public int isUserExist(string email, string pass)
+        public int isUserExist(string email)
         {
-            return userDAL.isUserExist(email, pass);
+            return userDAL.isUserExist(email);
         }
     }
 }

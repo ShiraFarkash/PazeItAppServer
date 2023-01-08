@@ -51,9 +51,9 @@ namespace API.Controllers
         }
 
         [Route("isUserExist"), HttpGet]
-        public int isUserExist(string email, string pass)
+        public int isUserExist(string email)
         {
-            return userBL.isUserExist( email,  pass);
+            return userBL.isUserExist( email);
         }
 
 
