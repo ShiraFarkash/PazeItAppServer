@@ -48,6 +48,7 @@
     <Compile Include="departmentDTO.cs" />
     <Compile Include="One_time_ListDTO.cs" />
     <Compile Include="productDTO.cs" />
+    <Compile Include="Product_To_ListDTO.cs" />
     <Compile Include="Product_To_OneTimeListDTO.cs" />
     <Compile Include="supermarketDTO.cs" />
     <Compile Include="userDTO.cs" />

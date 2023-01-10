@@ -71,14 +71,11 @@ warning 6002: The table/view 'C:\PITDATABASE.MDF.dbo.Branch_To_Product' does not
           <Property Name="categoryID" Type="int" Nullable="false" />
           <Property Name="barcode" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\PITDATABASE.MDF.dbo.Product_To_List' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Product_To_List">
           <Key>
-            <PropertyRef Name="constantListID" />
-            <PropertyRef Name="productID" />
-            <PropertyRef Name="quantity" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="constantListID" Type="int" Nullable="false" />
           <Property Name="productID" Type="int" Nullable="false" />
           <Property Name="quantity" Type="int" Nullable="false" />
@@ -309,6 +306,7 @@ warning 6002: The table/view 'C:\PITDATABASE.MDF.dbo.User_to_Lists' does not hav
           <EntitySet Name="department" EntityType="Self.department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="One_time_List" EntityType="Self.One_time_List" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_To_List" EntityType="Self.Product_To_List" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="supermarket" EntityType="Self.supermarket" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Branch_To_Product" EntityType="Self.Branch_To_Product" store:Type="Tables" store:Schema="dbo">
@@ -317,13 +315,6 @@ warning 6002: The table/view 'C:\PITDATABASE.MDF.dbo.User_to_Lists' does not hav
     [Branch_To_Product].[DepartmentID] AS [DepartmentID], 
     [Branch_To_Product].[productPrice] AS [productPrice]
     FROM [dbo].[Branch_To_Product] AS [Branch_To_Product]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Product_To_List" EntityType="Self.Product_To_List" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Product_To_List].[constantListID] AS [constantListID], 
-    [Product_To_List].[productID] AS [productID], 
-    [Product_To_List].[quantity] AS [quantity]
-    FROM [dbo].[Product_To_List] AS [Product_To_List]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Product_To_OneTimeList" EntityType="Self.Product_To_OneTimeList" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -609,7 +600,6 @@ warning 6002: The table/view 'C:\PITDATABASE.MDF.dbo.User_to_Lists' does not hav
           </AssociationSet>
           <EntitySet Name="Constant_List" EntityType="PITdataBaseModel.Constant_List" />
           <EntitySet Name="products" EntityType="PITdataBaseModel.product" />
-          <EntitySet Name="Product_To_List" EntityType="PITdataBaseModel.Product_To_List" />
           <AssociationSet Name="FK_product_category" Association="PITdataBaseModel.FK_product_category">
             <End Role="category" EntitySet="categories" />
             <End Role="product" EntitySet="products" />
@@ -617,10 +607,6 @@ warning 6002: The table/view 'C:\PITDATABASE.MDF.dbo.User_to_Lists' does not hav
           <AssociationSet Name="FK_Constant_List_users" Association="PITdataBaseModel.FK_Constant_List_users">
             <End Role="user" EntitySet="users" />
             <End Role="Constant_List" EntitySet="Constant_List" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_To_List_Constant_List" Association="PITdataBaseModel.FK_Product_To_List_Constant_List">
-            <End Role="Constant_List" EntitySet="Constant_List" />
-            <End Role="Product_To_List" EntitySet="Product_To_List" />
           </AssociationSet>
           <AssociationSet Name="FK_Branch_To_Product_product" Association="PITdataBaseModel.FK_Branch_To_Product_product">
             <End Role="product" EntitySet="products" />
@@ -630,15 +616,20 @@ warning 6002: The table/view 'C:\PITDATABASE.MDF.dbo.User_to_Lists' does not hav
             <End Role="product" EntitySet="products" />
             <End Role="product1" EntitySet="products" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product_To_List_product" Association="PITdataBaseModel.FK_Product_To_List_product">
-            <End Role="product" EntitySet="products" />
-            <End Role="Product_To_List" EntitySet="Product_To_List" />
-          </AssociationSet>
           <AssociationSet Name="FK_Product_To_OneTimeList_product" Association="PITdataBaseModel.FK_Product_To_OneTimeList_product">
             <End Role="product" EntitySet="products" />
             <End Role="Product_To_OneTimeList" EntitySet="Product_To_OneTimeList" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="Product_To_List" EntityType="PITdataBaseModel.Product_To_List" />
+          <AssociationSet Name="FK_Product_To_List_Constant_List" Association="PITdataBaseModel.FK_Product_To_List_Constant_List">
+            <End Role="Constant_List" EntitySet="Constant_List" />
+            <End Role="Product_To_List" EntitySet="Product_To_List" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_To_List_product" Association="PITdataBaseModel.FK_Product_To_List_product">
+            <End Role="product" EntitySet="products" />
+            <End Role="Product_To_List" EntitySet="Product_To_List" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Constant_List">
           <Key>
             <PropertyRef Name="Id" />
@@ -662,20 +653,8 @@ warning 6002: The table/view 'C:\PITDATABASE.MDF.dbo.User_to_Lists' does not hav
           <NavigationProperty Name="Branch_To_Product" Relationship="PITdataBaseModel.FK_Branch_To_Product_product" FromRole="product" ToRole="Branch_To_Product" />
           <NavigationProperty Name="product1" Relationship="PITdataBaseModel.FK_product_product" FromRole="product" ToRole="product1" />
           <NavigationProperty Name="product2" Relationship="PITdataBaseModel.FK_product_product" FromRole="product1" ToRole="product" />
-          <NavigationProperty Name="Product_To_List" Relationship="PITdataBaseModel.FK_Product_To_List_product" FromRole="product" ToRole="Product_To_List" />
           <NavigationProperty Name="Product_To_OneTimeList" Relationship="PITdataBaseModel.FK_Product_To_OneTimeList_product" FromRole="product" ToRole="Product_To_OneTimeList" />
-        </EntityType>
-        <EntityType Name="Product_To_List">
-          <Key>
-            <PropertyRef Name="constantListID" />
-            <PropertyRef Name="productID" />
-            <PropertyRef Name="quantity" />
-          </Key>
-          <Property Name="constantListID" Type="Int32" Nullable="false" />
-          <Property Name="productID" Type="Int32" Nullable="false" />
-          <Property Name="quantity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Constant_List" Relationship="PITdataBaseModel.FK_Product_To_List_Constant_List" FromRole="Product_To_List" ToRole="Constant_List" />
-          <NavigationProperty Name="product" Relationship="PITdataBaseModel.FK_Product_To_List_product" FromRole="Product_To_List" ToRole="product" />
+          <NavigationProperty Name="Product_To_List" Relationship="PITdataBaseModel.FK_Product_To_List_product" FromRole="product" ToRole="Product_To_List" />
         </EntityType>
         <Association Name="FK_product_category">
           <End Type="PITdataBaseModel.category" Role="category" Multiplicity="1" />
@@ -698,18 +677,6 @@ warning 6002: The table/view 'C:\PITDATABASE.MDF.dbo.User_to_Lists' does not hav
             </Principal>
             <Dependent Role="Constant_List">
               <PropertyRef Name="userID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Product_To_List_Constant_List">
-          <End Type="PITdataBaseModel.Constant_List" Role="Constant_List" Multiplicity="1" />
-          <End Type="PITdataBaseModel.Product_To_List" Role="Product_To_List" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Constant_List">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Product_To_List">
-              <PropertyRef Name="constantListID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -737,18 +704,6 @@ warning 6002: The table/view 'C:\PITDATABASE.MDF.dbo.User_to_Lists' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Product_To_List_product">
-          <End Type="PITdataBaseModel.product" Role="product" Multiplicity="1" />
-          <End Type="PITdataBaseModel.Product_To_List" Role="Product_To_List" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Product_To_List">
-              <PropertyRef Name="productID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Product_To_OneTimeList_product">
           <End Type="PITdataBaseModel.product" Role="product" Multiplicity="1" />
           <End Type="PITdataBaseModel.Product_To_OneTimeList" Role="Product_To_OneTimeList" Multiplicity="*" />
@@ -761,7 +716,42 @@ warning 6002: The table/view 'C:\PITDATABASE.MDF.dbo.User_to_Lists' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="Product_To_List">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="constantListID" Type="Int32" Nullable="false" />
+          <Property Name="productID" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Constant_List" Relationship="PITdataBaseModel.FK_Product_To_List_Constant_List" FromRole="Product_To_List" ToRole="Constant_List" />
+          <NavigationProperty Name="product" Relationship="PITdataBaseModel.FK_Product_To_List_product" FromRole="Product_To_List" ToRole="product" />
+        </EntityType>
+        <Association Name="FK_Product_To_List_Constant_List">
+          <End Type="PITdataBaseModel.Constant_List" Role="Constant_List" Multiplicity="1" />
+          <End Type="PITdataBaseModel.Product_To_List" Role="Product_To_List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Constant_List">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product_To_List">
+              <PropertyRef Name="constantListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_To_List_product">
+          <End Type="PITdataBaseModel.product" Role="product" Multiplicity="1" />
+          <End Type="PITdataBaseModel.Product_To_List" Role="Product_To_List" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product_To_List">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -878,6 +868,7 @@ warning 6002: The table/view 'C:\PITDATABASE.MDF.dbo.User_to_Lists' does not hav
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
                 <ScalarProperty Name="productID" ColumnName="productID" />
                 <ScalarProperty Name="constantListID" ColumnName="constantListID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

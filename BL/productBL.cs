@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace BL
 {
    public class productBL
@@ -24,10 +25,13 @@ namespace BL
                 productDAL.GatProductsByMainProduct(converters.productConverter.Map(p)) );
         }
 
-        public int addContantList(Constant_ListDTO constantList)
+       
+
+        public  bool addProductToContantList(IEnumerable<Product_To_ListDTO> product_To_ListDTO)
         {
-            
-             return productDAL.addContantList(converters.ConstantListConverter.Map(constantList));
+            return productDAL.addProductToContantList(converters.productConverter.Map(product_To_ListDTO));
         }
+
+       
     }
 }

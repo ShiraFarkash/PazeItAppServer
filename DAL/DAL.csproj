@@ -75,6 +75,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Class1.cs" />
+    <Compile Include="constantListDAL.cs" />
     <Compile Include="Constant_List.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

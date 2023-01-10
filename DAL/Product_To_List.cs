@@ -14,6 +14,7 @@ namespace DAL
     
     public partial class Product_To_List
     {
+        public int Id { get; set; }
         public int constantListID { get; set; }
         public int productID { get; set; }
         public int quantity { get; set; }

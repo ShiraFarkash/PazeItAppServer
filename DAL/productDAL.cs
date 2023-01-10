@@ -25,18 +25,36 @@ namespace DAL
             }
         }
 
-        public int addContantList(Constant_List c)
+   
+        public bool addProductToContantList(IEnumerable<Product_To_List> product_To_Lists)
         {
             using (PITdataBaseEntities DB = new PITdataBaseEntities())
             {
-                DB.Constant_List.Add(c);
-                DB.SaveChanges();
-                return c.Id;
-               
-              
+                foreach (var item in product_To_Lists)
+                {
+
+                    //object o = DB.Product_To_List.Find<(p => item.constantListID == p.constantListID &&
+                    //    item.productID == p.productID);
+                    //if (o == null)
+                    //    DB.Product_To_List.Add(item);
+                    //else {
+                    try { 
+                        DB.Product_To_List.First(p => item.constantListID == p.constantListID &&
+                        item.productID == p.productID).quantity += item.quantity;
+                        }
+                    catch
+                    {
+                        DB.Product_To_List.Add(item);
+                    }
+                    finally { 
+                     DB.SaveChanges();
+                    }
+                }
+                
+
+                return true;
+
             }
-
-
         }
     }
 }

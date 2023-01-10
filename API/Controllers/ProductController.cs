@@ -39,12 +39,7 @@ namespace API.Controllers
 
             return productBL.GatProductsByMainProduct(p);
         }
-        [Route("addContantList")]
-        [HttpPost]
-        public int addContantList(DTO.Constant_ListDTO constantList)
-        {
-            return productBL.addContantList(constantList); 
-        }
+  
 
         //public int addListOf_ProductToContantList()
         //{
@@ -53,6 +48,20 @@ namespace API.Controllers
 
         //public IHttpActionResult addProductToBasicList()
 
+        [Route("addProductToContantList")]
+        [HttpPost]
+        public IHttpActionResult addProductToContantList( List<DTO.Product_To_ListDTO> product_To_ListDTO)
+        {
+            return Ok(productBL.addProductToContantList(product_To_ListDTO));
+        }
+
+        constantListBL constantListBL = new constantListBL();
+        [Route("GatContantList")]
+        [HttpGet]
+        public IEnumerable<DTO.Constant_ListDTO> GatContantList(int userId)
+        {
+            return constantListBL.GatContantList(userId);
+        }
 
 
     }

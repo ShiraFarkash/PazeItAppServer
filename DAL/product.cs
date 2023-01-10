@@ -19,8 +19,8 @@ namespace DAL
         {
             this.Branch_To_Product = new HashSet<Branch_To_Product>();
             this.product1 = new HashSet<product>();
-            this.Product_To_List = new HashSet<Product_To_List>();
             this.Product_To_OneTimeList = new HashSet<Product_To_OneTimeList>();
+            this.Product_To_List = new HashSet<Product_To_List>();
         }
     
         public int Id { get; set; }
@@ -36,8 +36,8 @@ namespace DAL
         public virtual ICollection<product> product1 { get; set; }
         public virtual product product2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product_To_List> Product_To_List { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product_To_OneTimeList> Product_To_OneTimeList { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product_To_List> Product_To_List { get; set; }
     }
 }
