@@ -87,6 +87,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="constantListBL.cs" />
     <Compile Include="converters\branchConverter.cs" />
+    <Compile Include="converters\categoryConverter.cs" />
     <Compile Include="converters\ConstantListConverter.cs" />
     <Compile Include="converters\productConverter.cs" />
     <Compile Include="converters\supermarketCoverters.cs" />

@@ -30,9 +30,9 @@ namespace API.Controllers
 
         [Route("DeleteContantList")]
         [HttpPost]
-        public void DeleteContantList(DTO.Constant_ListDTO constantList)
+        public bool DeleteContantList(DTO.Constant_ListDTO constantList)
         {
-             constantListBL.DeleteContantList(constantList);
+            return constantListBL.DeleteContantList(constantList);
         }
 
 

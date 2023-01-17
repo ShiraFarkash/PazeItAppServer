@@ -32,6 +32,15 @@ namespace BL
             return productDAL.addProductToContantList(converters.productConverter.Map(product_To_ListDTO));
         }
 
-       
+        public IEnumerable<categoryDTO> GatCategory()
+        {
+            return converters.categoryConverter.Map( productDAL.GatCategory());
+        }
+
+        public IEnumerable<productDTO> GatCategoryProductByCategoryId(int categoryID)
+        {
+            return converters.productConverter.Map(productDAL.GatCategoryProductByCategoryId(categoryID));
+
+        }
     }
 }

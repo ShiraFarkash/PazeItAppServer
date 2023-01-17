@@ -40,7 +40,7 @@ namespace DAL
                     //else {
                     try { 
                         DB.Product_To_List.First(p => item.constantListID == p.constantListID &&
-                        item.productID == p.productID).quantity += item.quantity;
+                        item.productID == p.productID).quantity = item.quantity;
                         }
                     catch
                     {
@@ -54,6 +54,24 @@ namespace DAL
 
                 return true;
 
+            }
+        }
+
+        public IEnumerable<product> GatCategoryProductByCategoryId(int categoryID)
+        {
+            using (PITdataBaseEntities DB = new PITdataBaseEntities())
+            {
+                return DB.products.Where(p => p.categoryID == categoryID && p.productID!=null).ToList();
+            }
+
+           }
+
+
+        public IEnumerable<category> GatCategory()
+        {
+            using (PITdataBaseEntities DB = new PITdataBaseEntities())
+            {
+                return DB.categories.ToList();
             }
         }
     }

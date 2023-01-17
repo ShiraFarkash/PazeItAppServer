@@ -22,9 +22,9 @@ namespace BL
             return converters.ConstantListConverter.Map(constantListDAL.GatContantList(userId));
         }
 
-        public void DeleteContantList(Constant_ListDTO constantList)
+        public bool DeleteContantList(Constant_ListDTO constantList)
         {
-            constantListDAL.DeleteContantList(converters.ConstantListConverter.Map(constantList));
+            return constantListDAL.DeleteContantList(converters.ConstantListConverter.Map(constantList));
         }
     }
 }

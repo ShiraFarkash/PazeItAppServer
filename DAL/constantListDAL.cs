@@ -31,15 +31,19 @@ namespace DAL
             }
         }
 
-        public void DeleteContantList(Constant_List constant_List)
+        public bool DeleteContantList(Constant_List constant_List)
         {
             using(PITdataBaseEntities DB = new PITdataBaseEntities())
             {
-                DB.Constant_List.Remove(constant_List);
-                DB.SaveChanges();
                 IEnumerable<Product_To_List> enumerable = DB.Product_To_List.Where(p => p.constantListID == constant_List.Id).ToList();
                 DB.Product_To_List.RemoveRange(enumerable);
+
+                var Constant_List = DB.Constant_List.Single(c => c.Id == constant_List.Id);
+                DB.Constant_List.Remove(Constant_List);
+                DB.SaveChanges();
+                return true;
             }
         }
+
     }
 }

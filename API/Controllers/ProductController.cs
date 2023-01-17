@@ -55,14 +55,21 @@ namespace API.Controllers
             return Ok(productBL.addProductToContantList(product_To_ListDTO));
         }
 
-        constantListBL constantListBL = new constantListBL();
-        [Route("GatContantList")]
+
+        [Route("GatCategory")]
         [HttpGet]
-        public IEnumerable<DTO.Constant_ListDTO> GatContantList(int userId)
+        public IEnumerable<DTO.categoryDTO> GatCategory()
         {
-            return constantListBL.GatContantList(userId);
+            return productBL.GatCategory();
         }
 
+
+        [Route("GatCategoryProductByCategoryId")]
+        [HttpGet]
+        public IEnumerable<DTO.productDTO> GatCategoryProductByCategoryId(int categoryID)
+        {
+            return productBL.GatCategoryProductByCategoryId(categoryID);
+        }
 
     }
 }
