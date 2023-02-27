@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b3e58946be59415ab7ee5ec426afa513" Name="Diagram1" ZoomLevel="90">
-        <EntityTypeShape EntityType="PITdataBaseModel.Branch" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PITdataBaseModel.category" Width="1.5" PointX="9.75" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="PITdataBaseModel.department" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PITdataBaseModel.One_time_List" Width="1.5" PointX="7.875" PointY="0.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="PITdataBaseModel.supermarket" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PITdataBaseModel.user" Width="1.5" PointX="7.5" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PITdataBaseModel.Branch_To_Product" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PITdataBaseModel.Product_To_OneTimeList" Width="1.5" PointX="14.875" PointY="4.25" IsExpanded="true" />
+      <Diagram DiagramId="b3e58946be59415ab7ee5ec426afa513" Name="Diagram1" ZoomLevel="41">
+        <EntityTypeShape EntityType="PITdataBaseModel.Branch" Width="1.5" PointX="3.875" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PITdataBaseModel.category" Width="1.5" PointX="11.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="PITdataBaseModel.department" Width="1.5" PointX="5.625" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PITdataBaseModel.One_time_List" Width="1.5" PointX="9.625" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PITdataBaseModel.supermarket" Width="1.5" PointX="6.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PITdataBaseModel.user" Width="1.5" PointX="4.125" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PITdataBaseModel.Branch_To_Product" Width="1.875" PointX="8.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PITdataBaseModel.Product_To_OneTimeList" Width="2.125" PointX="13.625" PointY="3.75" IsExpanded="true" />
         <AssociationConnector Association="PITdataBaseModel.FK_Branch_supermarket" ManuallyRouted="false" />
         <AssociationConnector Association="PITdataBaseModel.FK_department_Branch" ManuallyRouted="false" />
         <AssociationConnector Association="PITdataBaseModel.FK_One_time_List_Branch" ManuallyRouted="false" />
@@ -20,14 +20,14 @@
         <AssociationConnector Association="PITdataBaseModel.FK_One_time_List_users" ManuallyRouted="false" />
         <AssociationConnector Association="PITdataBaseModel.FK_Product_To_OneTimeList_One_time_List" ManuallyRouted="false" />
         <AssociationConnector Association="PITdataBaseModel.User_to_Lists" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="PITdataBaseModel.Constant_List" Width="1.5" PointX="12" PointY="9.75" />
-        <EntityTypeShape EntityType="PITdataBaseModel.product" Width="1.5" PointX="12" PointY="5.25" />
+        <EntityTypeShape EntityType="PITdataBaseModel.Constant_List" Width="1.5" PointX="11.25" PointY="9.125" />
+        <EntityTypeShape EntityType="PITdataBaseModel.product" Width="1.5" PointX="13.5" PointY="6.25" />
         <AssociationConnector Association="PITdataBaseModel.FK_product_category" />
         <AssociationConnector Association="PITdataBaseModel.FK_Constant_List_users" />
         <AssociationConnector Association="PITdataBaseModel.FK_Branch_To_Product_product" />
         <AssociationConnector Association="PITdataBaseModel.FK_product_product" />
         <AssociationConnector Association="PITdataBaseModel.FK_Product_To_OneTimeList_product" />
-        <EntityTypeShape EntityType="PITdataBaseModel.Product_To_List" Width="1.5" PointX="14.25" PointY="7.375" />
+        <EntityTypeShape EntityType="PITdataBaseModel.Product_To_List" Width="1.5" PointX="15.5" PointY="8.375" />
         <AssociationConnector Association="PITdataBaseModel.FK_Product_To_List_Constant_List" />
         <AssociationConnector Association="PITdataBaseModel.FK_Product_To_List_product" />
         </Diagram>

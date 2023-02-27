@@ -22,7 +22,7 @@ namespace DAL
 
 
         }
-
+        //הוספת רשימה חדשה של מוצרי חובה
         public IEnumerable<Constant_List> GatContantList(int userId)
         {
             using (PITdataBaseEntities DB = new PITdataBaseEntities())
@@ -30,7 +30,7 @@ namespace DAL
                 return DB.Constant_List.Where(c=> c.userID==userId).ToList();
             }
         }
-
+      
         public bool DeleteContantList(Constant_List constant_List)
         {
             using(PITdataBaseEntities DB = new PITdataBaseEntities())
