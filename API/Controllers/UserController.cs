@@ -56,8 +56,17 @@ namespace API.Controllers
             return userBL.isUserExist( email);
         }
 
+        [Route("GetUserById"), HttpGet]
+        public userDTO GetUserById(int userId)
+        {
+            return userBL.GetUserById(userId);
+        }
 
-
+        [Route("EditUserDetails"), HttpPost]
+        public void EditUserDetails(userDTO user)
+        {
+             userBL.EditUserDetails(user);
+        }
 
 
         //[Route("AddBranch/{superName}/{addres}/{Bname}"), HttpPost]

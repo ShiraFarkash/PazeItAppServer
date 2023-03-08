@@ -89,10 +89,13 @@
     <Compile Include="converters\branchConverter.cs" />
     <Compile Include="converters\categoryConverter.cs" />
     <Compile Include="converters\ConstantListConverter.cs" />
+    <Compile Include="converters\OneTimeListConverter.cs" />
     <Compile Include="converters\productConverter.cs" />
+    <Compile Include="converters\Product_To_ListConverter.cs" />
     <Compile Include="converters\supermarketCoverters.cs" />
     <Compile Include="converters\userConverter.cs" />
     <Compile Include="EmailService.cs" />
+    <Compile Include="OneTimeListBL.cs" />
     <Compile Include="productBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="supermarketBL.cs" />

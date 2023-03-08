@@ -71,5 +71,12 @@ namespace API.Controllers
             return productBL.GatCategoryProductByCategoryId(categoryID);
         }
 
+        [Route("GetProductById")]
+        [HttpGet]
+        public DTO.productDTO GetProductById(int productId)
+        {
+            return productBL.GetProductById(productId);
+        }
+
     }
 }

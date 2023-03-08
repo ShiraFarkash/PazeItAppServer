@@ -26,5 +26,17 @@ namespace BL
         {
             return constantListDAL.DeleteContantList(converters.ConstantListConverter.Map(constantList));
         }
+
+        public IEnumerable<Product_To_ListDTO> GatOneContantList(int constantListID)
+        {
+            return converters.Product_To_ListConverter.Map(constantListDAL.GatOneContantList(constantListID));
+        }
+
+        public IEnumerable<productDTO> GatAllproductFromOneContantList(IEnumerable<Product_To_ListDTO> list)
+        {
+
+            return converters.productConverter.Map(constantListDAL.GatAllproductFromOneContantList(
+                converters.Product_To_ListConverter.Map(list)));
+        }
     }
 }

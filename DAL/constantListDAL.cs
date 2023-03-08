@@ -45,5 +45,31 @@ namespace DAL
             }
         }
 
+   
+        public List<product> GatAllproductFromOneContantList(IEnumerable<Product_To_List>list)
+        {
+            List<product> p = new List<product>();
+            using (PITdataBaseEntities DB = new PITdataBaseEntities())
+            {
+                foreach (var item in list)
+                {
+                    product i = DB.products.Find(item.productID);
+                    if(i!=null)
+                     p.Add(i);
+                }
+            }
+            return p;
+        }
+
+        //חזרת רשימת המוצרים הקשורים לרשימה
+        public IEnumerable<Product_To_List> GatOneContantList(int constantListID)
+        {
+            using (PITdataBaseEntities DB = new PITdataBaseEntities())
+            {
+                IEnumerable<Product_To_List> productsToList = DB.Product_To_List.Where(p => p.constantListID == constantListID).ToList();
+                return productsToList;
+            }
+        }
+            
     }
 }

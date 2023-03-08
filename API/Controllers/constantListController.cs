@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.Net.Mail;
 using BL;
 using System.Web.Http.Cors;
+using DTO;
 
 namespace API.Controllers
 {
@@ -34,7 +35,17 @@ namespace API.Controllers
         {
             return constantListBL.DeleteContantList(constantList);
         }
-
-
+        [Route("GatOneContantList")]
+        [HttpGet]
+        public IEnumerable<DTO.Product_To_ListDTO> GatOneContantList(int constantListID)
+        {
+            return constantListBL.GatOneContantList(constantListID);
+        }
+        [Route("GatAllproductFromOneContantList")]
+        [HttpPost]
+        public IEnumerable<DTO.productDTO> GatAllproductFromOneContantList(IEnumerable<Product_To_ListDTO> list)
+        {
+            return constantListBL.GatAllproductFromOneContantList(list);
+        }
     }
 }

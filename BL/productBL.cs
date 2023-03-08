@@ -42,5 +42,10 @@ namespace BL
             return converters.productConverter.Map(productDAL.GatCategoryProductByCategoryId(categoryID));
 
         }
+
+        public productDTO GetProductById(int productId)
+        {
+            return converters.productConverter.Map(productDAL.GetProductById(productId));
+        }
     }
 }

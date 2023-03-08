@@ -57,6 +57,15 @@ namespace DAL
             }
         }
 
+        public product GetProductById(int productId)
+        {
+            using (PITdataBaseEntities DB = new PITdataBaseEntities())
+            {
+                return DB.products.First(p => p.Id == productId);
+            }
+
+        }
+
         public IEnumerable<product> GatCategoryProductByCategoryId(int categoryID)
         {
             using (PITdataBaseEntities DB = new PITdataBaseEntities())

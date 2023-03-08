@@ -34,5 +34,15 @@ namespace BL
         {
             return userDAL.isUserExist(email);
         }
+
+        public userDTO GetUserById(int userId)
+        {
+          return converters.userConverter.Map(userDAL.GetUserById(userId));
+        }
+
+        public void EditUserDetails(userDTO user)
+        {
+            userDAL.EditUserDetails(converters.userConverter.Map(user));
+        }
     }
 }
