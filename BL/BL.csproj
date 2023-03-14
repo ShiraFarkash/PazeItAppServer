@@ -92,6 +92,7 @@
     <Compile Include="converters\OneTimeListConverter.cs" />
     <Compile Include="converters\productConverter.cs" />
     <Compile Include="converters\Product_To_ListConverter.cs" />
+    <Compile Include="converters\Product_To_OneTimeListConverter.cs" />
     <Compile Include="converters\supermarketCoverters.cs" />
     <Compile Include="converters\userConverter.cs" />
     <Compile Include="EmailService.cs" />

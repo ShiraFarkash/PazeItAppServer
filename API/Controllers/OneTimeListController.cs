@@ -22,5 +22,27 @@ namespace API.Controllers
             return OneTimeListBL.GetHistoryList(userId);
         }
 
+        [Route("AddOneTimeList"), HttpPost]
+        public int AddOneTimeList(int userId)
+        {
+            return OneTimeListBL.AddOneTimeList(userId);
+        }
+
+        [Route("GetOneTimeList"), HttpGet]
+        public int GetOneTimeList(int userId)
+        {
+            return OneTimeListBL.GetOneTimeList(userId);
+        }
+
+        [Route("IncreaseOrDecreaseProductQuantity"), HttpPost]
+        public bool IncreaseOrDecreaseProductQuantity(DTO.Product_To_OneTimeListDTO p)
+        {
+            return OneTimeListBL.IncreaseOrDecreaseProductQuantity(p);
+        }
+        [Route("GetListOf_ProductToOneTimeList"), HttpGet]
+        public IEnumerable<DTO.Product_To_OneTimeListDTO> GetListOf_ProductToOneTimeList(int listId)
+        {
+            return OneTimeListBL.GetListOf_ProductToOneTimeList(listId);
+        }
     }
 }

@@ -27,14 +27,14 @@ namespace DAL
     
         public virtual DbSet<Branch> Branches { get; set; }
         public virtual DbSet<category> categories { get; set; }
+        public virtual DbSet<Constant_List> Constant_List { get; set; }
         public virtual DbSet<department> departments { get; set; }
         public virtual DbSet<One_time_List> One_time_List { get; set; }
+        public virtual DbSet<product> products { get; set; }
+        public virtual DbSet<Product_To_List> Product_To_List { get; set; }
+        public virtual DbSet<Product_To_OneTimeList> Product_To_OneTimeList { get; set; }
         public virtual DbSet<supermarket> supermarkets { get; set; }
         public virtual DbSet<user> users { get; set; }
         public virtual DbSet<Branch_To_Product> Branch_To_Product { get; set; }
-        public virtual DbSet<Product_To_OneTimeList> Product_To_OneTimeList { get; set; }
-        public virtual DbSet<Constant_List> Constant_List { get; set; }
-        public virtual DbSet<product> products { get; set; }
-        public virtual DbSet<Product_To_List> Product_To_List { get; set; }
     }
 }

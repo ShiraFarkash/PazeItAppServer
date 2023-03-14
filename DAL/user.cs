@@ -17,9 +17,9 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public user()
         {
+            this.Constant_List = new HashSet<Constant_List>();
             this.One_time_List = new HashSet<One_time_List>();
             this.One_time_List1 = new HashSet<One_time_List>();
-            this.Constant_List = new HashSet<Constant_List>();
         }
     
         public int Id { get; set; }
@@ -29,10 +29,10 @@ namespace DAL
         public string password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Constant_List> Constant_List { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<One_time_List> One_time_List { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<One_time_List> One_time_List1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Constant_List> Constant_List { get; set; }
     }
 }

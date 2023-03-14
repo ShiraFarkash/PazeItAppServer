@@ -14,6 +14,7 @@ namespace DAL
     
     public partial class Branch_To_Product
     {
+        public int Id { get; set; }
         public int productID { get; set; }
         public int DepartmentID { get; set; }
         public decimal productPrice { get; set; }

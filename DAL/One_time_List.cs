@@ -26,7 +26,7 @@ namespace DAL
         public System.DateTime ProductionDate { get; set; }
         public Nullable<System.DateTime> endDate { get; set; }
         public bool status { get; set; }
-        public Nullable<int> branchID { get; set; }
+        public int branchID { get; set; }
     
         public virtual Branch Branch { get; set; }
         public virtual user user { get; set; }
