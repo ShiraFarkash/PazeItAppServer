@@ -78,6 +78,11 @@ namespace API.Controllers
             return productBL.GetProductById(productId);
         }
 
+         [Route("GetProductsByName"), HttpGet]
+        public IEnumerable<DTO.productDTO> GetProductsByName(string productName)
+        {
+            return productBL.GetProductsByName(productName);
+        }
 
 
     }

@@ -29,9 +29,9 @@ namespace DAL
         public int categoryID { get; set; }
         public string barcode { get; set; }
     
-        public virtual category category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Branch_To_Product> Branch_To_Product { get; set; }
+        public virtual category category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<product> product1 { get; set; }
         public virtual product product2 { get; set; }

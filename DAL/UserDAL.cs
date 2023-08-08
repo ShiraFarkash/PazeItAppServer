@@ -46,6 +46,22 @@ namespace DAL
             }
         }
 
+        public user GetUserEmail(string email)
+        {
+            using (PITdataBaseEntities DB = new PITdataBaseEntities())
+            {
+                user users = new user();
+                try {
+                    return DB.users.Where(p => (p.email).Equals(email) ).First();
+                }
+                catch
+                {
+                    return users;
+                }
+              
+            }
+        }
+
         public void EditUserDetails(user user)
         {
             using (PITdataBaseEntities DB = new PITdataBaseEntities())

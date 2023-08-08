@@ -44,5 +44,10 @@ namespace BL
         {
             userDAL.EditUserDetails(converters.userConverter.Map(user));
         }
+
+        public userDTO GetUserEmail(string email)
+        {
+            return converters.userConverter.Map(userDAL.GetUserEmail(email));
+        }
     }
 }

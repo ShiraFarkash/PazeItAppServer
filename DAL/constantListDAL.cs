@@ -61,6 +61,34 @@ namespace DAL
             return p;
         }
 
+        public bool AddConstantListProductsTo_ProductToOneTimeList(IEnumerable<Product_To_List> list, int listId)
+        {
+            using (PITdataBaseEntities DB = new PITdataBaseEntities())
+            {
+                foreach (var item in list)
+                {
+                    try
+                    {
+                        Product_To_OneTimeList first = DB.Product_To_OneTimeList.First
+                            (pro => pro.OneTimeListID == listId && pro.productID == item.productID);
+                    }
+                    catch
+                    {
+                        Product_To_OneTimeList p = new Product_To_OneTimeList();
+                        p.productID = item.productID;
+                        p.quantity = item.quantity;
+                        p.OneTimeListID = listId;
+                        p.isTaken = false;
+                        DB.Product_To_OneTimeList.Add(p);
+                        DB.SaveChanges();
+                    }
+
+
+                }
+            }
+            return true;
+        }
+
         //חזרת רשימת המוצרים הקשורים לרשימה
         public IEnumerable<Product_To_List> GatOneContantList(int constantListID)
         {

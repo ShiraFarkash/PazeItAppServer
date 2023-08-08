@@ -68,6 +68,11 @@ namespace API.Controllers
              userBL.EditUserDetails(user);
         }
 
+        [Route("GetUserEmail"), HttpGet]
+        public userDTO GetUserEmail(string email)
+        {
+            return userBL.GetUserEmail(email);
+        }
 
         //[Route("AddBranch/{superName}/{addres}/{Bname}"), HttpPost]
         //public IHttpActionResult AddBranch(string superName, string addres, string Bname)

@@ -17,8 +17,8 @@ namespace BL.converters
         {
             return new Product_To_List
             {
-              
-              constantListID = Product_To_ListDTO.constantListID,
+                Id = Product_To_ListDTO.Id,
+                constantListID = Product_To_ListDTO.constantListID,
               productID= Product_To_ListDTO.productID,
               quantity= Product_To_ListDTO.quantity
 
@@ -83,7 +83,14 @@ namespace BL.converters
             }
 
         }
+        public static IEnumerable<product> Map(IEnumerable<productDTO> products)
+        {
+            foreach (var item in products)
+            {
+                yield return Map(item);
+            }
 
+        }
 
     }
 }

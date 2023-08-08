@@ -16,7 +16,7 @@ namespace DAL
     public partial class PITdataBaseEntities : DbContext
     {
         public PITdataBaseEntities()
-            : base("name=PITdataBaseEntities3")
+            : base("name=PITdataBaseEntities")
         {
         }
     
@@ -36,6 +36,5 @@ namespace DAL
         public virtual DbSet<Product_To_OneTimeList> Product_To_OneTimeList { get; set; }
         public virtual DbSet<supermarket> supermarkets { get; set; }
         public virtual DbSet<user> users { get; set; }
-        public virtual DbSet<User_to_Lists> User_to_Lists { get; set; }
     }
 }

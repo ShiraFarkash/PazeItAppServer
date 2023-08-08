@@ -14,6 +14,7 @@ namespace BL.converters
         {
             return new Branch
             {
+                Id=branchDTO.Id,
                 supermarketID = branchDTO.supermarketID,
                  address = branchDTO.address,
                  branchName= branchDTO.branchName
@@ -25,11 +26,30 @@ namespace BL.converters
         {
             return new branchDTO
             {
+                Id = branch.Id,
                 supermarketID = branch.supermarketID,
                 address = branch.address,
                 branchName = branch.branchName
 
             };
+
+        }
+
+        public static IEnumerable<branchDTO> Map(IEnumerable<Branch> branch)
+        {
+            foreach (var item in branch)
+            {
+                yield return Map(item);
+            }
+
+        }
+
+        public static IEnumerable<Branch> Map(IEnumerable<branchDTO> branch)
+        {
+            foreach (var item in branch)
+            {
+                yield return Map(item);
+            }
 
         }
     }

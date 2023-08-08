@@ -48,6 +48,9 @@ namespace BL
             return converters.productConverter.Map(productDAL.GetProductById(productId));
         }
 
-
+        public IEnumerable<productDTO> GetProductsByName(string productName)
+        {
+            return converters.productConverter.Map(productDAL.GetProductsByName(productName));
+        }
     }
 }

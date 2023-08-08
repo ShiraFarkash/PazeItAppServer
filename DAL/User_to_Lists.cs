@@ -12,14 +12,13 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Branch_To_Product
+    public partial class User_to_Lists
     {
-        public int Id { get; set; }
-        public int productID { get; set; }
-        public int DepartmentID { get; set; }
-        public Nullable<decimal> productPrice { get; set; }
+        public int userID { get; set; }
+        public int OneTimeListID { get; set; }
+        public bool isApproved { get; set; }
     
-        public virtual department department { get; set; }
-        public virtual product product { get; set; }
+        public virtual One_time_List One_time_List { get; set; }
+        public virtual user user { get; set; }
     }
 }

@@ -101,11 +101,9 @@ warning 6002: The table/view 'C:\USERS\MEIRA\SOURCE\REPOS\PAZEITAPP\DAL\PITDATAB
           <Key>
             <PropertyRef Name="userID" />
             <PropertyRef Name="OneTimeListID" />
-            <PropertyRef Name="isApproved" />
           </Key>
           <Property Name="userID" Type="int" Nullable="false" />
           <Property Name="OneTimeListID" Type="int" Nullable="false" />
-          <Property Name="isApproved" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="users">
           <Key>
@@ -312,8 +310,7 @@ warning 6002: The table/view 'C:\USERS\MEIRA\SOURCE\REPOS\PAZEITAPP\DAL\PITDATAB
           <EntitySet Name="User_to_Lists" EntityType="Self.User_to_Lists" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [User_to_Lists].[userID] AS [userID], 
-    [User_to_Lists].[OneTimeListID] AS [OneTimeListID], 
-    [User_to_Lists].[isApproved] AS [isApproved]
+    [User_to_Lists].[OneTimeListID] AS [OneTimeListID]
     FROM [dbo].[User_to_Lists] AS [User_to_Lists]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Branch_supermarket" Association="Self.FK_Branch_supermarket">
@@ -447,7 +444,7 @@ warning 6002: The table/view 'C:\USERS\MEIRA\SOURCE\REPOS\PAZEITAPP\DAL\PITDATAB
           <NavigationProperty Name="Branch" Relationship="Self.FK_One_time_List_Branch" FromRole="One_time_List" ToRole="Branch" />
           <NavigationProperty Name="user" Relationship="Self.FK_One_time_List_users" FromRole="One_time_List" ToRole="users" />
           <NavigationProperty Name="Product_To_OneTimeList" Relationship="Self.FK_Product_To_OneTimeList_One_time_List" FromRole="One_time_List" ToRole="Product_To_OneTimeList" />
-          <NavigationProperty Name="User_to_Lists" Relationship="Self.FK_User_to_Lists_one_time_List" FromRole="One_time_List" ToRole="User_to_Lists" />
+          <NavigationProperty Name="users" Relationship="Self.User_to_Lists" FromRole="One_time_List" ToRole="users" />
         </EntityType>
         <EntityType Name="product">
           <Key>
@@ -508,19 +505,7 @@ warning 6002: The table/view 'C:\USERS\MEIRA\SOURCE\REPOS\PAZEITAPP\DAL\PITDATAB
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Constant_List" Relationship="Self.FK_Constant_List_users" FromRole="users" ToRole="Constant_List" />
           <NavigationProperty Name="One_time_List" Relationship="Self.FK_One_time_List_users" FromRole="users" ToRole="One_time_List" />
-          <NavigationProperty Name="User_to_Lists" Relationship="Self.FK_User_to_Lists_users" FromRole="users" ToRole="User_to_Lists" />
-        </EntityType>
-        <EntityType Name="User_to_Lists">
-          <Key>
-            <PropertyRef Name="userID" />
-            <PropertyRef Name="OneTimeListID" />
-            <PropertyRef Name="isApproved" />
-          </Key>
-          <Property Name="userID" Type="Int32" Nullable="false" />
-          <Property Name="OneTimeListID" Type="Int32" Nullable="false" />
-          <Property Name="isApproved" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="One_time_List" Relationship="Self.FK_User_to_Lists_one_time_List" FromRole="User_to_Lists" ToRole="One_time_List" />
-          <NavigationProperty Name="user" Relationship="Self.FK_User_to_Lists_users" FromRole="User_to_Lists" ToRole="users" />
+          <NavigationProperty Name="One_time_List1" Relationship="Self.User_to_Lists" FromRole="users" ToRole="One_time_List" />
         </EntityType>
         <Association Name="FK_Branch_supermarket">
           <End Role="supermarket" Type="Self.supermarket" Multiplicity="1" />
@@ -642,18 +627,6 @@ warning 6002: The table/view 'C:\USERS\MEIRA\SOURCE\REPOS\PAZEITAPP\DAL\PITDATAB
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_User_to_Lists_one_time_List">
-          <End Role="One_time_List" Type="Self.One_time_List" Multiplicity="1" />
-          <End Role="User_to_Lists" Type="Self.User_to_Lists" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="One_time_List">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="User_to_Lists">
-              <PropertyRef Name="OneTimeListID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_product_product">
           <End Role="product" Type="Self.product" Multiplicity="0..1" />
           <End Role="product1" Type="Self.product" Multiplicity="*" />
@@ -690,17 +663,9 @@ warning 6002: The table/view 'C:\USERS\MEIRA\SOURCE\REPOS\PAZEITAPP\DAL\PITDATAB
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_User_to_Lists_users">
-          <End Role="users" Type="Self.user" Multiplicity="1" />
-          <End Role="User_to_Lists" Type="Self.User_to_Lists" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="User_to_Lists">
-              <PropertyRef Name="userID" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="User_to_Lists">
+          <End Role="One_time_List" Type="Self.One_time_List" Multiplicity="*" />
+          <End Role="users" Type="Self.user" Multiplicity="*" />
         </Association>
         <EntityContainer Name="PITdataBaseEntities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Branches" EntityType="Self.Branch" />
@@ -714,7 +679,6 @@ warning 6002: The table/view 'C:\USERS\MEIRA\SOURCE\REPOS\PAZEITAPP\DAL\PITDATAB
           <EntitySet Name="Product_To_OneTimeList" EntityType="Self.Product_To_OneTimeList" />
           <EntitySet Name="supermarkets" EntityType="Self.supermarket" />
           <EntitySet Name="users" EntityType="Self.user" />
-          <EntitySet Name="User_to_Lists" EntityType="Self.User_to_Lists" />
           <AssociationSet Name="FK_Branch_supermarket" Association="Self.FK_Branch_supermarket">
             <End Role="supermarket" EntitySet="supermarkets" />
             <End Role="Branch" EntitySet="Branches" />
@@ -755,10 +719,6 @@ warning 6002: The table/view 'C:\USERS\MEIRA\SOURCE\REPOS\PAZEITAPP\DAL\PITDATAB
             <End Role="One_time_List" EntitySet="One_time_List" />
             <End Role="Product_To_OneTimeList" EntitySet="Product_To_OneTimeList" />
           </AssociationSet>
-          <AssociationSet Name="FK_User_to_Lists_one_time_List" Association="Self.FK_User_to_Lists_one_time_List">
-            <End Role="One_time_List" EntitySet="One_time_List" />
-            <End Role="User_to_Lists" EntitySet="User_to_Lists" />
-          </AssociationSet>
           <AssociationSet Name="FK_product_product" Association="Self.FK_product_product">
             <End Role="product" EntitySet="products" />
             <End Role="product1" EntitySet="products" />
@@ -771,9 +731,9 @@ warning 6002: The table/view 'C:\USERS\MEIRA\SOURCE\REPOS\PAZEITAPP\DAL\PITDATAB
             <End Role="product" EntitySet="products" />
             <End Role="Product_To_OneTimeList" EntitySet="Product_To_OneTimeList" />
           </AssociationSet>
-          <AssociationSet Name="FK_User_to_Lists_users" Association="Self.FK_User_to_Lists_users">
+          <AssociationSet Name="User_to_Lists" Association="Self.User_to_Lists">
+            <End Role="One_time_List" EntitySet="One_time_List" />
             <End Role="users" EntitySet="users" />
-            <End Role="User_to_Lists" EntitySet="User_to_Lists" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -893,15 +853,14 @@ warning 6002: The table/view 'C:\USERS\MEIRA\SOURCE\REPOS\PAZEITAPP\DAL\PITDATAB
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="User_to_Lists">
-            <EntityTypeMapping TypeName="PITdataBaseModel.User_to_Lists">
-              <MappingFragment StoreEntitySet="User_to_Lists">
-                <ScalarProperty Name="userID" ColumnName="userID" />
-                <ScalarProperty Name="OneTimeListID" ColumnName="OneTimeListID" />
-                <ScalarProperty Name="isApproved" ColumnName="isApproved" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <AssociationSetMapping Name="User_to_Lists" TypeName="PITdataBaseModel.User_to_Lists" StoreEntitySet="User_to_Lists">
+            <EndProperty Name="One_time_List">
+              <ScalarProperty Name="Id" ColumnName="OneTimeListID" />
+            </EndProperty>
+            <EndProperty Name="users">
+              <ScalarProperty Name="Id" ColumnName="userID" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

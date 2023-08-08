@@ -10,11 +10,14 @@ namespace BL.converters
 {
    public class supermarketCoverters
     {
-        public static supermarket Map(supermarketDTO supermarketDTO)
+        public static supermarket Map(supermarketDTO supermarket)
         {
             return new supermarket
             {
-                Name=supermarketDTO.Name
+                Id= supermarket.Id,
+                Name= supermarket.Name,
+                src= supermarket.src
+
             };
 
         }
@@ -23,11 +26,31 @@ namespace BL.converters
         {
             return new supermarketDTO
             {
-                Name = supermarket.Name
+                Id = supermarket.Id,
+                Name = supermarket.Name,
+                src = supermarket.src
 
             };
 
         }
+
+        public static IEnumerable<supermarketDTO> Map(IEnumerable<supermarket> supermarket)
+        {
+            foreach (var item in supermarket)
+            {
+                yield return Map(item);
+            }
+
+        }
+        public static IEnumerable<supermarket> Map(IEnumerable<supermarketDTO> supermarket)
+        {
+            foreach (var item in supermarket)
+            {
+                yield return Map(item);
+            }
+
+        }
+
 
 
 

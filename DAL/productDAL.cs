@@ -57,6 +57,22 @@ namespace DAL
             }
         }
 
+        public IEnumerable<product> GetProductsByName(string productName)
+        {
+            using (PITdataBaseEntities DB = new PITdataBaseEntities())
+            {
+                List<product> products = new List<product>();
+                try
+                {
+                    return DB.products.Where(p => p.productName.Contains(productName) &&p.productID!=null).ToList();
+                }
+                catch
+                {
+                    return products;
+                }
+            }
+        }
+
         public product GetProductById(int productId)
         {
             using (PITdataBaseEntities DB = new PITdataBaseEntities())

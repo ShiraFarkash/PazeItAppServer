@@ -12,9 +12,9 @@ namespace DAL
         {
             using (PITdataBaseEntities DB = new PITdataBaseEntities())
             {
-                return DB.One_time_List.Where(l => l.userID == userId && l.status==true).ToList();
+                return DB.One_time_List.Where(l => l.userID == userId && l.status == true).ToList();
             }
-         }
+        }
 
         public int AddOneTimeList(int userId)
         {
@@ -30,7 +30,7 @@ namespace DAL
                 };
                 DB.One_time_List.Add(o);
                 DB.SaveChanges();
-                
+
                 return o.Id;
             }
         }
@@ -44,13 +44,14 @@ namespace DAL
                     if (product_To_OneTimeList.quantity == 0)
                     {
                         DB.Product_To_OneTimeList.Remove(DB.Product_To_OneTimeList.First(p =>
-                        p.productID == product_To_OneTimeList.productID && 
+                        p.productID == product_To_OneTimeList.productID &&
                         p.OneTimeListID == product_To_OneTimeList.OneTimeListID));
                     }
-                    else { 
-                    DB.Product_To_OneTimeList.First(p =>
-                    p.productID== product_To_OneTimeList.productID 
-                    && p.OneTimeListID==product_To_OneTimeList.OneTimeListID).quantity = product_To_OneTimeList.quantity;
+                    else
+                    {
+                        DB.Product_To_OneTimeList.First(p =>
+                        p.productID == product_To_OneTimeList.productID
+                        && p.OneTimeListID == product_To_OneTimeList.OneTimeListID).quantity = product_To_OneTimeList.quantity;
                     }
                 }
                 catch
@@ -65,12 +66,53 @@ namespace DAL
             }
         }
 
+        public void SherListWithUser(int listId, int userId)
+        {
+            using(PITdataBaseEntities DB= new PITdataBaseEntities())
+            {
+                User_to_Lists u = new User_to_Lists();
+                u.userID = userId;
+                u.OneTimeListID = listId;
+                DB.User_to_Lists.Add(u);
+                DB.SaveChanges();
+            }
+        }
+
+        public void WhenListIsDone(int listId)
+        {
+           using(PITdataBaseEntities DB=new PITdataBaseEntities())
+            {
+                DB.One_time_List.First(list => list.Id == listId).status=true;
+                DB.SaveChanges();
+            }
+        }
+
+        public bool ChangeIsTaken(Product_To_OneTimeList product_To_OneTimeList)
+        {
+            using (PITdataBaseEntities DB = new PITdataBaseEntities())
+            {
+                DB.Product_To_OneTimeList.First(p=> p==product_To_OneTimeList).isTaken =
+                    ! DB.Product_To_OneTimeList.First(p => p == product_To_OneTimeList).isTaken;
+                return DB.Product_To_OneTimeList.First(p => p == product_To_OneTimeList).isTaken;
+            }
+        }
+
+        public bool AddProductsTo_ProductToOneTimeList(IEnumerable<Product_To_OneTimeList> enumerable, int listId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<product> GetTheProductOfOneTimeList(IEnumerable<Product_To_OneTimeList> enumerable)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Product_To_OneTimeList> GetListOf_ProductToOneTimeList(int listId)
         {
             using (PITdataBaseEntities DB = new PITdataBaseEntities())
-            {       
-               return DB.Product_To_OneTimeList.Where(p => p.OneTimeListID == listId).ToList(); 
-              
+            {
+                return DB.Product_To_OneTimeList.Where(p => p.OneTimeListID == listId).ToList();
+
             }
         }
 
@@ -78,7 +120,7 @@ namespace DAL
         {
             using (PITdataBaseEntities DB = new PITdataBaseEntities())
             {
-               return DB.One_time_List.First(o => o.userID == userId && o.status==false).Id;
+                return DB.One_time_List.First(o => o.userID == userId && o.status == false).Id;
             }
         }
     }

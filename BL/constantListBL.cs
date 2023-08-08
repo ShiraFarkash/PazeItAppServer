@@ -38,5 +38,10 @@ namespace BL
             return converters.productConverter.Map(constantListDAL.GatAllproductFromOneContantList(
                 converters.Product_To_ListConverter.Map(list)));
         }
+
+        public bool AddConstantListProductsTo_ProductToOneTimeList(IEnumerable<Product_To_ListDTO> list, int listId)
+        {
+            return constantListDAL.AddConstantListProductsTo_ProductToOneTimeList(converters.Product_To_ListConverter.Map(list), listId);
+        }
     }
 }

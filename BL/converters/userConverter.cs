@@ -10,7 +10,7 @@ namespace BL.converters
 {
     public static class userConverter
     {
-        public static user Map(userDTO user)
+        public static  user Map(userDTO user)
         {
             return new user
             {

@@ -44,5 +44,48 @@ namespace API.Controllers
         {
             return OneTimeListBL.GetListOf_ProductToOneTimeList(listId);
         }
+        [Route("GetTheProductOfOneTimeList"), HttpPost]
+        public IEnumerable<DTO.productDTO> GetTheProductOfOneTimeList(IEnumerable<DTO.Product_To_OneTimeListDTO> list)
+        {
+            return OneTimeListBL.GetTheProductOfOneTimeList(list);
+        }
+
+        [Route("GetTheProductByOneTimeListId"), HttpGet]
+        public IEnumerable<DTO.productDTO> GetTheProductByOneTimeListId(int listId)
+        {
+
+            return OneTimeListBL.GetTheProductOfOneTimeList(OneTimeListBL.GetListOf_ProductToOneTimeList(listId));
+        }
+
+        //ע"מ להעתיק רשימה כמו היסטוריה או מוצרי חובה לתוך סל הקניות שלי
+        [Route("AddProductsTo_ProductToOneTimeList"), HttpPost]
+        public bool AddProductsTo_ProductToOneTimeList(IEnumerable<DTO.Product_To_OneTimeListDTO> list,int listId)
+        {
+            return OneTimeListBL.AddProductsTo_ProductToOneTimeList(list, listId);
+        }
+
+
+        //שינוי האם מוצר נלקח או לא
+        [Route("ChangeIsTaken"), HttpPost]
+        public bool ChangeIsTaken(DTO.Product_To_OneTimeListDTO Product_To_OneTimeListDTO)
+        {
+            return OneTimeListBL.ChangeIsTaken(Product_To_OneTimeListDTO);
+        }
+
+        //הפיכת הרשימה הנוכחית להיסטוריה ע"י שינוי הסטטוס
+        //וכן יצירת רשימה חדשה למשתמש והחזרת ערך המפתח שלו
+        [Route("WhenListIsDone"), HttpGet]
+        public int WhenListIsDone(int listId, int userId)
+        {
+            OneTimeListBL.WhenListIsDone(listId);
+            return AddOneTimeList( userId);
+        }
+
+        //שיתוף רשימה עם משתמש נוסף
+        [Route("SherListWithUser"), HttpPost]
+        public void SherListWithUser(int listId, int userId)
+        {
+            OneTimeListBL.SherListWithUser(listId, userId);
+        }
     }
 }

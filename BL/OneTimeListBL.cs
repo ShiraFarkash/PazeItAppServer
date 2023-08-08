@@ -35,5 +35,33 @@ namespace BL
         {
             return converters.Product_To_OneTimeListConverter.Map(OneTimeListDAL.GetListOf_ProductToOneTimeList(listId));
         }
+
+        public IEnumerable<productDTO> GetTheProductOfOneTimeList(IEnumerable<Product_To_OneTimeListDTO> p)
+        {
+            return converters.productConverter.Map(
+                OneTimeListDAL.GetTheProductOfOneTimeList(converters.Product_To_OneTimeListConverter.Map(p)));
+        }
+
+        public bool AddProductsTo_ProductToOneTimeList(IEnumerable<Product_To_OneTimeListDTO> list,int listId)
+        {
+            return OneTimeListDAL.AddProductsTo_ProductToOneTimeList(converters.Product_To_OneTimeListConverter.Map(list),listId);
+
+           
+        }
+
+        public bool ChangeIsTaken(Product_To_OneTimeListDTO product_To_OneTimeListDTO)
+        {
+            return OneTimeListDAL.ChangeIsTaken(converters.Product_To_OneTimeListConverter.Map(product_To_OneTimeListDTO));
+        }
+
+        public void WhenListIsDone(int listId)
+        {
+            OneTimeListDAL.WhenListIsDone(listId);
+        }
+
+        public void SherListWithUser(int listId, int userId)
+        {
+            OneTimeListDAL.SherListWithUser(listId, userId);
+        }
     }
 }

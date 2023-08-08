@@ -19,7 +19,7 @@ namespace DAL
         {
             this.Constant_List = new HashSet<Constant_List>();
             this.One_time_List = new HashSet<One_time_List>();
-            this.One_time_List1 = new HashSet<One_time_List>();
+            this.User_to_Lists = new HashSet<User_to_Lists>();
         }
     
         public int Id { get; set; }
@@ -33,6 +33,6 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<One_time_List> One_time_List { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<One_time_List> One_time_List1 { get; set; }
+        public virtual ICollection<User_to_Lists> User_to_Lists { get; set; }
     }
 }

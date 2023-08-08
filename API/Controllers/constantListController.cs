@@ -15,7 +15,7 @@ namespace API.Controllers
     [RoutePrefix("api/constantList")]
     public class ConstantListController : ApiController
     {
-        constantListBL constantListBL = new constantListBL();
+         constantListBL constantListBL = new constantListBL();
         [Route("GatContantList")]
         [HttpGet]
         public IEnumerable<DTO.Constant_ListDTO> GatContantList(int userId)
@@ -46,6 +46,11 @@ namespace API.Controllers
         public IEnumerable<DTO.productDTO> GatAllproductFromOneContantList(IEnumerable<Product_To_ListDTO> list)
         {
             return constantListBL.GatAllproductFromOneContantList(list);
+        }
+        [Route("AddConstantListProductsTo_ProductToOneTimeList"), HttpPost]
+        public bool AddConstantListProductsTo_ProductToOneTimeList(IEnumerable<DTO.Product_To_ListDTO> list, int listId)
+        {
+            return constantListBL.AddConstantListProductsTo_ProductToOneTimeList(list, listId);
         }
     }
 }
